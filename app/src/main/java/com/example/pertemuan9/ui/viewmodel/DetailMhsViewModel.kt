@@ -1,5 +1,7 @@
 package com.example.pertemuan9.ui.viewmodel
 
+import com.example.pertemuan9.data.entity.Mahasiswa
+
 data class DetailUitate(
     val detailUiEvent: MahasiswaEvent = MahasiswaEvent(),
     val isLoading: Boolean = false,
@@ -11,4 +13,16 @@ data class DetailUitate(
 
     val isUiEventNotEmpty: Boolean
         get() = detailUiEvent != MahasiswaEvent()
+}
+
+
+fun Mahasiswa.toDetailUiEvent() : MahasiswaEvent{
+    return  MahasiswaEvent(
+        nim = nim,
+        nama = nama,
+        jenisKelamin = jenisKelamin,
+        alamat = alamat,
+        kelas = kelas,
+        angkatan = angkatan
+    )
 }
