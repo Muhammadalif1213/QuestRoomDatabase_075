@@ -74,6 +74,8 @@ class UpdateMhsViewModel(
             )
         }
 
-
+    }
+    fun resetSnackBarMessage(){
+        updateUitate = updateUitate.copy(snackBarMessage = null)
     }
 }
