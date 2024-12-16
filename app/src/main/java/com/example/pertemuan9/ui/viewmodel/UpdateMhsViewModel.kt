@@ -20,4 +20,14 @@ class UpdateMhsViewModel(
 
     private val _nim: String = checkNotNull(savedStateHandle[DestinasiEdit.NIM])
 
+    init {
+        viewModelScope.launch {
+            updateUitate = repositoryMhs.getMhs(_nim)
+                .filterNotNull()
+                .first()
+                .toUIStateMhs()
+        }
+    }
+
+
 }
