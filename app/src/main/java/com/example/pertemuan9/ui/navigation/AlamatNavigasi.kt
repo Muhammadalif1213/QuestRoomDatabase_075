@@ -3,3 +3,9 @@ package com.example.pertemuan9.ui.navigation
 interface AlamatNavigasi {
     val route: String
 }
+
+object DestinasiDetail : AlamatNavigasi {
+    override val route = "detail"
+    const val NIM = "nim"
+    val routesWithArg = "$route/{$NIM}"
+}
