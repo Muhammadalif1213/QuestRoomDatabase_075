@@ -11,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
@@ -31,6 +32,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -40,6 +42,7 @@ import com.example.pertemuan9.ui.viewmodel.HomeMhsViewModel
 import com.example.pertemuan9.ui.viewmodel.HomeUiState
 import com.example.pertemuan9.ui.viewmodel.PenyediaViewModel
 import kotlinx.coroutines.launch
+
 
 @Composable
 fun HomeMhsView(
@@ -54,7 +57,7 @@ fun HomeMhsView(
                 judul = "Daftar Mahasiswa",
                 showBackButton = false,
                 onBack = { },
-                modifier = modifier,
+                modifier = modifier
             )
         },
         floatingActionButton = {
@@ -84,6 +87,7 @@ fun HomeMhsView(
     }
 }
 
+
 @Composable
 fun BodyHomeMhsView(
     homeUiState: HomeUiState,
@@ -112,14 +116,14 @@ fun BodyHomeMhsView(
                 }
             }
         }
-        homeUiState.listMhs.isEmpty() ->{
+        homeUiState.listMhs.isEmpty() -> {
             //menampilkan pesan jika data kosong
             Box(
                 modifier = modifier.fillMaxSize(),
                 contentAlignment = Alignment.Center
             ){
                 Text(
-                    text = "Tidak ada data majasiswa",
+                    text = "Tidak ada data mahasiswa",
                     fontSize = 18.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(16.dp)
@@ -135,25 +139,26 @@ fun BodyHomeMhsView(
                     println(
                         it
                     )
-                }
+                },
+                modifier = modifier
             )
         }
     }
 }
 
+
 @Composable
 fun ListMahasiswa(
     listMhs: List<Mahasiswa>,
     modifier: Modifier = Modifier,
-    onClick: (String) -> Unit = {}
+    onClick: (String) -> Unit = { }
 ){
     LazyColumn (
         modifier = modifier
     ){
         items(
             items = listMhs,
-            itemContent = {
-                mhs ->
+            itemContent = { mhs ->
                 CardMhs(
                     mhs = mhs,
                     onClick = { onClick(mhs.nim) }
@@ -197,13 +202,13 @@ fun CardMhs(
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Icon(imageVector = Icons.Filled.Person,
+                Icon(imageVector = Icons.Filled.DateRange,
                     contentDescription = "")
                 Spacer(modifier = Modifier.padding(4.dp))
                 Text(
                     text = mhs.nim,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 20.sp
+                    fontSize = 16.sp
                 )
             }
             Row (
