@@ -15,6 +15,7 @@ import com.example.pertemuan9.ui.view.mahasiswa.DestinasiInsert
 import com.example.pertemuan9.ui.view.mahasiswa.DetailMhsView
 import com.example.pertemuan9.ui.view.mahasiswa.HomeMhsView
 import com.example.pertemuan9.ui.view.mahasiswa.InsertMhsView
+import com.example.pertemuan9.ui.view.mahasiswa.UpdateMhsView
 
 @Composable
 fun PengelolaHalaman(
@@ -23,7 +24,7 @@ fun PengelolaHalaman(
 ){
     NavHost(
         navController = navController,
-        startDestination = DestinasiInsert.route) {
+        startDestination = DestinsiHome.route) {
         composable(
             route = DestinsiHome.route
         ){
@@ -71,6 +72,24 @@ fun PengelolaHalaman(
                     }
                 )
             }
+        }
+        composable(
+            DestinasiUpdate.routesWithArg,
+            arguments = listOf(
+                navArgument(DestinasiUpdate.NIM){
+                    type = NavType.StringType
+                }
+            )
+        ){
+            UpdateMhsView(
+                onBack = {
+                    navController.popBackStack()
+                },
+                onNavigate = {
+                    navController.popBackStack()
+                },
+                modifier = modifier,
+            )
         }
     }
 }
