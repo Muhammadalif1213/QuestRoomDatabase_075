@@ -4,7 +4,7 @@ interface AlamatNavigasi {
     val route: String
 }
 
-object DestinsiHome : AlamatNavigasi{
+object DestinasiHome : AlamatNavigasi{
     override val route = "home"
 }
 
