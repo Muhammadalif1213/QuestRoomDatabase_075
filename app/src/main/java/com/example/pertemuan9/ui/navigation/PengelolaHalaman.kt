@@ -8,7 +8,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.pertemuan9.ui.view.mahasiswa.DestinasiInsert
@@ -16,6 +15,7 @@ import com.example.pertemuan9.ui.view.mahasiswa.DetailMhsView
 import com.example.pertemuan9.ui.view.mahasiswa.HomeMhsView
 import com.example.pertemuan9.ui.view.mahasiswa.InsertMhsView
 import com.example.pertemuan9.ui.view.mahasiswa.UpdateMhsView
+import com.example.pertemuan9.ui.viewmodel.HomeMhsViewModel
 
 @Composable
 fun PengelolaHalaman(
@@ -23,17 +23,15 @@ fun PengelolaHalaman(
     modifier: Modifier = Modifier
 ){
     NavHost(
-        navController = navController,
-        startDestination = DestinsiHome.route) {
+        navController = navController, startDestination = DestinasiHome.route) {
+
         composable(
-            route = DestinsiHome.route
-        ){
+            route = DestinasiHome.route
+        ) {
             HomeMhsView(
-                onDetailClick = {nim ->
+                onDetailClick = { nim ->
                     navController.navigate("${DestinasiDetail.route}/$nim")
-                    println(
-                        "PengelolaHalaman: nim = $nim"
-                    )
+                    println("PengelolaHalaman: nim = $nim")
                 },
                 onAddMhs = {
                     navController.navigate(DestinasiInsert.route)
@@ -45,10 +43,14 @@ fun PengelolaHalaman(
             route = DestinasiInsert.route
         ) {
             InsertMhsView(
-                onBack = {}, onNavigate = {}
+                onBack = {
+                    navController.popBackStack()
+                }, onNavigate = {
+                    navController.popBackStack()
+                },
+                modifier = modifier,
             )
         }
-
         composable(
             DestinasiDetail.routesWithArg,
             arguments = listOf(
@@ -80,7 +82,7 @@ fun PengelolaHalaman(
                     type = NavType.StringType
                 }
             )
-        ){
+        ) {
             UpdateMhsView(
                 onBack = {
                     navController.popBackStack()
@@ -90,6 +92,9 @@ fun PengelolaHalaman(
                 },
                 modifier = modifier,
             )
+
         }
+
+
     }
 }
