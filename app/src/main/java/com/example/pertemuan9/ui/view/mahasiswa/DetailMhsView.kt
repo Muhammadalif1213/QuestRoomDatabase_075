@@ -223,8 +223,8 @@ private fun DeleteConfirmationDialog(
         text = { Text("Apakah anda yakin ingin menghapus data? ")},
         modifier = modifier,
         dismissButton = {
-            TextButton(onClick = onDeleteConfirm) {
-                Text(text = "Yes")
+            TextButton(onClick = onDeleteCancel) {
+                Text(text = "Cancel")
             }
         },
         confirmButton = {
