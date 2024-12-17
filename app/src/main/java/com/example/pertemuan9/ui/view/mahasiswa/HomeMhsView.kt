@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -24,6 +25,7 @@ import com.example.pertemuan9.ui.customWidget.TopAppBar
 import com.example.pertemuan9.ui.viewmodel.HomeMhsViewModel
 import com.example.pertemuan9.ui.viewmodel.HomeUiState
 import com.example.pertemuan9.ui.viewmodel.PenyediaViewModel
+import kotlinx.coroutines.launch
 
 @Composable
 fun HomeMhsView(
@@ -74,5 +76,28 @@ fun BodyHomeMhsView(
     onClick: (String) -> Unit = { },
     modifier: Modifier = Modifier
 ){
+    val coroutineScope = rememberCoroutineScope()
+    val snackbarHostState = remember { SnackbarHostState() } // Snackbar state
+    when {
+        homeUiState.isLoading -> {
+            //Menampilkan Indikator loading
+            Box(
+                modifier = modifier.fillMaxSize(),
+                contentAlignment = Alignment.Center
+            ){
+                CircularProgressIndicator()
+            }
+        }
+        homeUiState.isError -> {
+            //Menampilkan pesan error
+            LaunchedEffect(homeUiState.errorMessage) {
+                homeUiState.errorMessage?.let { message ->
+                    coroutineScope.launch {
+                        snackbarHostState.showSnackbar(message)
+                    }
+                }
+            }
+        }
+    }
 
 }
