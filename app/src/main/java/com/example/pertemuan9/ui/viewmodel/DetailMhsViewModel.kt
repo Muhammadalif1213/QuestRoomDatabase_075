@@ -4,7 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pertemuan9.data.entity.Mahasiswa
-import com.example.pertemuan9.repository.LocalRepositoryMhs
+import com.example.pertemuan9.repository.RepositoryMhs
 import com.example.pertemuan9.ui.navigation.DestinasiDetail
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.SharingStarted
@@ -18,7 +18,7 @@ import kotlinx.coroutines.launch
 
 class DetailMhsViewModel(
     savedStateHandle: SavedStateHandle,
-    private val repositoryMhs: LocalRepositoryMhs,
+    private val repositoryMhs: RepositoryMhs,
 ): ViewModel(){
     private val _nim: String = checkNotNull(savedStateHandle[DestinasiDetail.NIM])
 
